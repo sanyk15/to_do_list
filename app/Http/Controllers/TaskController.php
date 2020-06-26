@@ -26,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        return view('tasks.index');
     }
 
     /**
@@ -44,40 +44,6 @@ class TaskController extends Controller
         Task::create($request->all());
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfuly.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Task $task)
-    {
-        //
     }
 
     /**
