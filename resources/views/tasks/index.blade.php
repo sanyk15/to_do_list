@@ -13,18 +13,13 @@
 </div>
 @endif
 
-<form action="{{ route('tasks.store') }}" method="POST">
+<form action="{{ route('tasks.store') }}" method="POST" class="form-inline">
     @csrf
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Text:</strong>
-                <input type="text" name="text" class="form-control" placeholder="Text">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="input" class="sr-only">Text:</label>
+        <input type="text" name="text" class="form-control" id="input" placeholder="Text">
     </div>
+    <button type="submit" class="btn btn-primary mb-2">Create</button>
 </form>
 
 <!-- текущие задачи -->
@@ -35,26 +30,22 @@
 @endif
 
 <table class="table table-bordered">
+    <br>
     <tr>
-        <th>ID</th>
         <th>Text</th>
-        <th width="280px">Action</th>
+        <th width="30px">Del</th>
     </tr>
     @foreach ($tasks as $task)
     <tr>
-        <td>{{ $task->id }}</td>
         <td>{{ $task->text }}</td>
         <td>
             <form action="{{ route('tasks.destroy',$task->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">X</button>
             </form>
         </td>
     </tr>
     @endforeach
 </table>
-
-{!! $tasks->links() !!}
-
 @endsection
