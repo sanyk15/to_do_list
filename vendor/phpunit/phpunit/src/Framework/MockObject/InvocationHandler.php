@@ -9,8 +9,6 @@
  */
 namespace PHPUnit\Framework\MockObject;
 
-use Exception;
-use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use PHPUnit\Framework\MockObject\Rule\InvocationOrder;
 
@@ -108,9 +106,8 @@ final class InvocationHandler
     }
 
     /**
-     * @throws Exception
-     *
-     * @return mixed|void
+     * @throws RuntimeException
+     * @throws \Exception
      */
     public function invoke(Invocation $invocation)
     {
@@ -128,7 +125,7 @@ final class InvocationHandler
                         $hasReturnValue = true;
                     }
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $exception = $e;
             }
         }
@@ -142,7 +139,7 @@ final class InvocationHandler
         }
 
         if (!$this->returnValueGeneration) {
-            $exception = new ExpectationFailedException(
+            $exception = new RuntimeException(
                 \sprintf(
                     'Return value inference disabled and no expectation set up for %s::%s()',
                     $invocation->getClassName(),
@@ -174,7 +171,7 @@ final class InvocationHandler
     }
 
     /**
-     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Throwable
      */
     public function verify(): void
     {
